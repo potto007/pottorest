@@ -13,17 +13,10 @@ import views.html.*;
 
 public class UserController extends Controller{
 
-    public static void getUsers() {
-        List<User> users = User.getUsers();
-//        return ok(Json.toJson(users));
-        render(users);
-    }
-
-/*
     public static Result getUsers() {
         List<User> users = User.getUsers();
         return ok(Json.toJson(users));
-    }*/
+    }
 
     public static Result getUser(Long id) {
         User user = User.getUser(id);
@@ -47,9 +40,4 @@ public class UserController extends Controller{
         return noContent();
     }
 
-    @Util
-    @Catch(value = Exception.class)
-    public static Result throwException(Exception e) {
-        return TODO;
-    }
 }

@@ -1,6 +1,0 @@
-{
-    "id"    : "${user.id}",
-    "userName"  : "${user.userName}",
-    "firstName" : "${user.firstName}",
-    "lastName"  : "${user.lastName}"
-}

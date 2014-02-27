@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<user>
-    <id>${user.id}</id>
-    <userName>${user.userName}</userName>
-    <firstName>${user.firstName}</firstName>
-    <lastName>${user.lastName</lastName>
-</user>
