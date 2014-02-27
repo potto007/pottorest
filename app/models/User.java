@@ -24,6 +24,24 @@ public class User extends Model {
             Long.class, User.class
     );
 
+    public static List<User> all() {
+        return find.all();
+    }
 
+    public static User retrieve(Long id) {
+        return find.byId(id);
+    }
+
+    public static void create(User user) {
+        user.save();
+    }
+
+    public static void update(Long id) {
+        find.ref(id).update();
+    }
+
+    public static void delete(Long id) {
+        find.ref(id).delete();
+    }
 
 }
