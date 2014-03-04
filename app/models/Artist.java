@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
-public class User extends Model {
+public class Artist extends Model {
 
     @Id
     public Long id;
@@ -24,26 +24,26 @@ public class User extends Model {
     @Column(name = "name_last")
     public String lastName;
 
-    public static Finder<Long,User> find = new Finder(
-            Long.class, User.class
+    public static Finder<Long, Artist> find = new Finder(
+            Long.class, Artist.class
     );
 
-    public static List<User> getUsers() {
+    public static List<Artist> getUsers() {
         return find.all();
     }
 
-    public static User getUser(Long id) {
+    public static Artist getUser(Long id) {
         return find.byId(id);
     }
 
-    public static User addUser(User user) {
-        user.save();
-        return user;
+    public static Artist addUser(Artist artist) {
+        artist.save();
+        return artist;
     }
 
-    public static User updateUser(Long id, User user) {
-        user.id = id;
-        user.update();
+    public static Artist updateUser(Long id, Artist artist) {
+        artist.id = id;
+        artist.update();
         return find.byId(id);
     }
 

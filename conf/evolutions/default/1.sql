@@ -3,7 +3,7 @@
 
 # --- !Ups
 
-create table user (
+create table artist (
   id                        bigint not null,
   username                  varchar(255),
   name_first                varchar(255),
@@ -20,7 +20,7 @@ create sequence user_seq;
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists user;
+drop table if exists artist;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
