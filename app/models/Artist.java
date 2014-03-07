@@ -8,46 +8,44 @@ import play.data.validation.Constraints.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "artist")
 public class Artist extends Model {
 
     @Id
     public Long id;
 
     @Required
-    @Column(name= "username")
-    public String userName;
+    @Column(name= "artist_name")
+    public String artistName;
 
-    @Column(name = "name_first")
-    public String firstName;
-
-    @Column(name = "name_last")
-    public String lastName;
+    @Required
+    @Column(name = "label_id")
+    public String labelId;
 
     public static Finder<Long, Artist> find = new Finder(
             Long.class, Artist.class
     );
 
-    public static List<Artist> getUsers() {
+    public static List<Artist> getArtists() {
         return find.all();
     }
 
-    public static Artist getUser(Long id) {
+    public static Artist getArtist(Long id) {
         return find.byId(id);
     }
 
-    public static Artist addUser(Artist artist) {
+    public static Artist addArtist(Artist artist) {
         artist.save();
         return artist;
     }
 
-    public static Artist updateUser(Long id, Artist artist) {
+    public static Artist updateArtist(Long id, Artist artist) {
         artist.id = id;
         artist.update();
         return find.byId(id);
     }
 
-    public static void deleteUser(Long id) {
+    public static void deleteArtist(Long id) {
         find.ref(id).delete();
     }
 

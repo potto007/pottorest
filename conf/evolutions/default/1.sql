@@ -5,13 +5,12 @@
 
 create table artist (
   id                        bigint not null,
-  username                  varchar(255),
-  name_first                varchar(255),
-  name_last                 varchar(255),
-  constraint pk_user primary key (id))
+  artist_name               varchar(255),
+  label_id                  varchar(255),
+  constraint pk_artist primary key (id))
 ;
 
-create sequence user_seq;
+create sequence artist_seq;
 
 
 
@@ -24,5 +23,5 @@ drop table if exists artist;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
-drop sequence if exists user_seq;
+drop sequence if exists artist_seq;
 
