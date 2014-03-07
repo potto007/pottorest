@@ -13,15 +13,19 @@ public class Artist extends Model {
 
     @Id
     @GeneratedValue
+    @Column(name = "artist_id")
     public Long id;
 
     @Required
     @Column(name= "artist_name", unique = true)
     public String artistName;
 
-    @Required
-    @Column(name = "label_id")
-    public String labelId;
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name="artist_id", referencedColumnName = "label_id")
+    private Label label;
+//    @Required
+//    @Column(name = "label_id")
+//    public String labelId;
 
     public static Finder<Long, Artist> find = new Finder(
             Long.class, Artist.class

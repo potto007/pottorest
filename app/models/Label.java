@@ -13,6 +13,7 @@ public class Label extends Model {
 
     @Id
     @GeneratedValue
+    @Column(name= "label_id")
     public Long id;
 
     @Required

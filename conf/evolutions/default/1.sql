@@ -4,30 +4,33 @@
 # --- !Ups
 
 create table album (
-  id                        bigint not null,
+  album_id                  bigint not null,
   album_name                varchar(255),
-  constraint pk_album primary key (id))
+  constraint pk_album primary key (album_id))
 ;
 
 create table artist (
-  id                        bigint not null,
+  artist_id                 bigint not null,
   artist_name               varchar(255),
-  label_id                  varchar(255),
+  label_label_id            bigint,
   constraint uq_artist_artist_name unique (artist_name),
-  constraint pk_artist primary key (id))
+  constraint pk_artist primary key (artist_id))
 ;
 
 create table label (
-  id                        bigint not null,
+  label_id                  bigint not null,
   label_name                varchar(255),
   constraint uq_label_label_name unique (label_name),
-  constraint pk_label primary key (id))
+  constraint pk_label primary key (label_id))
 ;
 
 create table song (
-  id                        bigint not null,
+  song_id                   bigint not null,
   song_name                 varchar(255),
-  constraint pk_song primary key (id))
+  artist_artist_id          bigint,
+  album_album_id            bigint,
+  constraint uq_song_1 unique (song_name,artist_artist_id),
+  constraint pk_song primary key (song_id))
 ;
 
 create sequence album_seq;
@@ -38,6 +41,12 @@ create sequence label_seq;
 
 create sequence song_seq;
 
+alter table artist add constraint fk_artist_label_1 foreign key (label_label_id) references label (label_id) on delete restrict on update restrict;
+create index ix_artist_label_1 on artist (label_label_id);
+alter table song add constraint fk_song_artist_2 foreign key (artist_artist_id) references artist (artist_id) on delete restrict on update restrict;
+create index ix_song_artist_2 on song (artist_artist_id);
+alter table song add constraint fk_song_album_3 foreign key (album_album_id) references album (album_id) on delete restrict on update restrict;
+create index ix_song_album_3 on song (album_album_id);
 
 
 

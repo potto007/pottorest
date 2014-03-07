@@ -13,11 +13,12 @@ public class Album extends Model {
 
     @Id
     @GeneratedValue
-    public Long id;
+    @Column(name = "album_id")
+    private Long id;
 
     @Required
     @Column(name= "album_name")
-    public String albumName;
+    private String albumName;
 
     public static Finder<Long, Album> find = new Finder(
             Long.class, Album.class

@@ -9,24 +9,31 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "song",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"song_name", "artist_id"})})
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"song_name", "artist_artist_id"})})
 public class Song extends Model {
 
     @Id
     @GeneratedValue
-    public Long id;
+    @Column(name= "song_id")
+    private Long id;
 
     @Required
     @Column(name= "song_name")
-    public String songName;
+    private String songName;
 
-    @Required
-    @Column(name= "artist_id")
-    public Long artistId;
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name="song_id", referencedColumnName = "artist_id")
+    private Artist artist;
+//    @Required
+//    @Column(name= "artist_id")
+//    public Long artistId;
 
-    @Required
-    @Column(name= "album_id")
-    public Long albumId;
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name="song_id", referencedColumnName = "album_id")
+    private Album album;
+//    @Required
+//    @Column(name= "album_id")
+//    public Long albumId;
 
     public static Finder<Long, Song> find = new Finder(
             Long.class, Song.class
