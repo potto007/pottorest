@@ -12,10 +12,11 @@ import javax.persistence.*;
 public class Artist extends Model {
 
     @Id
+    @GeneratedValue
     public Long id;
 
     @Required
-    @Column(name= "artist_name")
+    @Column(name= "artist_name", unique = true)
     public String artistName;
 
     @Required

@@ -12,6 +12,7 @@ import javax.persistence.*;
 public class Album extends Model {
 
     @Id
+    @GeneratedValue
     public Long id;
 
     @Required

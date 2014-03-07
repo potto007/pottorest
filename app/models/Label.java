@@ -12,10 +12,11 @@ import javax.persistence.*;
 public class Label extends Model {
 
     @Id
+    @GeneratedValue
     public Long id;
 
     @Required
-    @Column(name= "label_name")
+    @Column(name= "label_name", unique = true)
     public String labelName;
 
     public static Finder<Long, Label> find = new Finder(

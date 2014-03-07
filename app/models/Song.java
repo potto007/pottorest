@@ -8,15 +8,25 @@ import play.data.validation.Constraints.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "song")
+@Table(name = "song",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"song_name", "artist_id"})})
 public class Song extends Model {
 
     @Id
+    @GeneratedValue
     public Long id;
 
     @Required
     @Column(name= "song_name")
     public String songName;
+
+    @Required
+    @Column(name= "artist_id")
+    public Long artistId;
+
+    @Required
+    @Column(name= "album_id")
+    public Long albumId;
 
     public static Finder<Long, Song> find = new Finder(
             Long.class, Song.class
