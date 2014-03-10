@@ -22,8 +22,8 @@ public class Artist extends Model {
     public String artistName;
 
     @ManyToOne
-    @PrimaryKeyJoinColumn(name="artist_id", referencedColumnName = "label_id")
-    private Label label;
+//    @PrimaryKeyJoinColumn(name="artist_id", referencedColumnName = "label_id")
+    public Label label;
 //    @Required
 //    @Column(name = "label_id")
 //    public String labelId;
@@ -40,12 +40,19 @@ public class Artist extends Model {
         return find.byId(id);
     }
 
-    public static Artist addArtist(Artist artist) {
+    public static Artist addArtist(Artist artist, Long labelId) {
+        artist.label = Label.find.ref(labelId);
         artist.save();
         return artist;
     }
 
-    public static Artist updateArtist(Long id, Artist artist) {
+    public static Artist updateArtistLabel(Artist artist, Long artistId, Long labelId) {
+        artist.id = artistId;
+        artist.update();
+        return find.byId(artistId);
+    }
+
+    public static Artist updateArtist(Artist artist, Long id) {
         artist.id = id;
         artist.update();
         return find.byId(id);

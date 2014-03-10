@@ -22,11 +22,22 @@ public class ArtistController extends Controller{
         return artist == null ? notFound() : ok(Json.toJson(artist));
     }
 
-    public static Result createArtist() {
+    public static Result createArtist(Long labelId) {
         Artist newArtist = Json.fromJson(request().body().asJson(), Artist.class);
         try {
-            Artist inserted = Artist.addArtist(newArtist);
+            Artist inserted = Artist.addArtist(newArtist, labelId);
             return created(Json.toJson(inserted));
+        } catch (PersistenceException e) {
+            WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());
+            return badRequest(errorHandler.getMessage());
+        }
+    }
+
+    public static Result updateArtistLabel(Long artistId, Long labelId) {
+        Artist artist = Json.fromJson(request().body().asJson(), Artist.class);
+        try {
+            Artist updated = Artist.updateArtist(artist, id);
+            return ok(Json.toJson(updated));
         } catch (PersistenceException e) {
             WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());
             return badRequest(errorHandler.getMessage());
@@ -36,7 +47,7 @@ public class ArtistController extends Controller{
     public static Result updateArtist(Long id) {
         Artist artist = Json.fromJson(request().body().asJson(), Artist.class);
         try {
-            Artist updated = Artist.updateArtist(id, artist);
+            Artist updated = Artist.updateArtist(artist, id);
             return ok(Json.toJson(updated));
         } catch (PersistenceException e) {
             WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());

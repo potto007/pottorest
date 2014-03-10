@@ -7,7 +7,7 @@ GET         /                    controllers.Application.index()
 
 GET         /artists               controllers.ArtistController.getArtists
 GET         /artists/:id           controllers.ArtistController.getArtist(id: Long)
-POST        /artists               controllers.ArtistController.createArtist
+#POST        /artists               controllers.ArtistController.createArtist
 PUT         /artists/:id           controllers.ArtistController.updateArtist(id: Long)
 DELETE      /artists/:id           controllers.ArtistController.deleteArtist(id: Long)
 GET         /albums               controllers.AlbumController.getAlbums
@@ -18,6 +18,7 @@ DELETE      /albums/:id           controllers.AlbumController.deleteAlbum(id: Lo
 GET         /labels               controllers.LabelController.getLabels
 GET         /labels/:id           controllers.LabelController.getLabel(id: Long)
 POST        /labels               controllers.LabelController.createLabel
+POST        /labels/:label/artists   controllers.ArtistController.createArtist(label: Long)
 PUT         /labels/:id           controllers.LabelController.updateLabel(id: Long)
 DELETE      /labels/:id           controllers.LabelController.deleteLabel(id: Long)
 GET         /songs               controllers.SongController.getSongs
