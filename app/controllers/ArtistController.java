@@ -7,6 +7,8 @@ import play.libs.Json;
 
 import models.*;
 
+import javax.persistence.PersistenceException;
+
 public class ArtistController extends Controller{
 
     public static Result getArtists() {
@@ -21,14 +23,26 @@ public class ArtistController extends Controller{
 
     public static Result createArtist() {
         Artist newArtist = Json.fromJson(request().body().asJson(), Artist.class);
-        Artist inserted = Artist.addArtist(newArtist);
-        return created(Json.toJson(inserted));
+        try {
+            Artist inserted = Artist.addArtist(newArtist);
+            return created(Json.toJson(inserted));
+        } catch (PersistenceException e) {
+            Map<String, String> errorMap = new HashMap<String, String>();
+            errorMap.put("error", e.getMessage());
+            return badRequest(Json.toJson(errorMap));
+        }
     }
 
     public static Result updateArtist(Long id) {
         Artist artist = Json.fromJson(request().body().asJson(), Artist.class);
-        Artist updated = Artist.updateArtist(id, artist);
-        return ok(Json.toJson(updated));
+        try {
+            Artist updated = Artist.updateArtist(id, artist);
+            return ok(Json.toJson(updated));
+        } catch (PersistenceException e) {
+            Map<String, String> errorMap = new HashMap<String, String>();
+            errorMap.put("error", e.getMessage());
+            return badRequest(Json.toJson(errorMap));
+        }
     }
 
     public static Result deleteArtist(Long id) {
