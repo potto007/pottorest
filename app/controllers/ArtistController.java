@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.*;
 
+import exceptions.WebAppExceptionHandler;
 import play.mvc.*;
 import play.libs.Json;
 
@@ -27,9 +28,8 @@ public class ArtistController extends Controller{
             Artist inserted = Artist.addArtist(newArtist);
             return created(Json.toJson(inserted));
         } catch (PersistenceException e) {
-            Map<String, String> errorMap = new HashMap<String, String>();
-            errorMap.put("error", e.getMessage());
-            return badRequest(Json.toJson(errorMap));
+            WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());
+            return badRequest(errorHandler.getMessage());
         }
     }
 
@@ -39,9 +39,8 @@ public class ArtistController extends Controller{
             Artist updated = Artist.updateArtist(id, artist);
             return ok(Json.toJson(updated));
         } catch (PersistenceException e) {
-            Map<String, String> errorMap = new HashMap<String, String>();
-            errorMap.put("error", e.getMessage());
-            return badRequest(Json.toJson(errorMap));
+            WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());
+            return badRequest(errorHandler.getMessage());
         }
     }
 

@@ -2,10 +2,13 @@ package controllers;
 
 import java.util.*;
 
+import exceptions.WebAppExceptionHandler;
 import play.mvc.*;
 import play.libs.Json;
 
 import models.*;
+
+import javax.persistence.PersistenceException;
 
 public class SongController extends Controller{
 
@@ -21,14 +24,24 @@ public class SongController extends Controller{
 
     public static Result createSong() {
         Song newSong = Json.fromJson(request().body().asJson(), Song.class);
-        Song inserted = Song.addSong(newSong);
-        return created(Json.toJson(inserted));
+        try {
+            Song inserted = Song.addSong(newSong);
+            return created(Json.toJson(inserted));
+        } catch (PersistenceException e) {
+            WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());
+            return badRequest(errorHandler.getMessage());
+        }
     }
 
     public static Result updateSong(Long id) {
         Song song = Json.fromJson(request().body().asJson(), Song.class);
-        Song updated = Song.updateSong(id, song);
-        return ok(Json.toJson(updated));
+        try {
+            Song updated = Song.updateSong(id, song);
+            return ok(Json.toJson(updated));
+        } catch (PersistenceException e) {
+            WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());
+            return badRequest(errorHandler.getMessage());
+        }
     }
 
     public static Result deleteSong(Long id) {
