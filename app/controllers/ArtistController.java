@@ -34,9 +34,8 @@ public class ArtistController extends Controller{
     }
 
     public static Result updateArtistLabel(Long artistId, Long labelId) {
-        Artist artist = Json.fromJson(request().body().asJson(), Artist.class);
         try {
-            Artist updated = Artist.updateArtist(artist, id);
+            Artist updated = Artist.updateArtistLabel(artistId, labelId);
             return ok(Json.toJson(updated));
         } catch (PersistenceException e) {
             WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());

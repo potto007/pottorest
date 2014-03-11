@@ -46,16 +46,19 @@ public class Artist extends Model {
         return artist;
     }
 
-    public static Artist updateArtistLabel(Artist artist, Long artistId, Long labelId) {
-        artist.id = artistId;
+    public static Artist updateArtistLabel(Long artistId, Long labelId) {
+        Artist artist = find.byId(artistId);
+        artist.label = Label.find.ref(labelId);
         artist.update();
-        return find.byId(artistId);
+//        return find.byId(artistId);
+        return artist;
     }
 
     public static Artist updateArtist(Artist artist, Long id) {
         artist.id = id;
         artist.update();
-        return find.byId(id);
+//        return find.byId(id);
+        return artist;
     }
 
     public static void deleteArtist(Long id) {
