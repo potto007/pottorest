@@ -20,6 +20,7 @@ GET         /labels                                 controllers.LabelController.
 GET         /labels/:id                             controllers.LabelController.getLabel(id: Long)
 POST        /labels                                 controllers.LabelController.createLabel
 POST        /labels/:label/artists                  controllers.ArtistController.createArtist(label: Long)
+GET         /labels/:label/artists                  controllers.ArtistController.getLabelArtists(label: Long)
 PUT         /labels/:id                             controllers.LabelController.updateLabel(id: Long)
 DELETE      /labels/:id                             controllers.LabelController.deleteLabel(id: Long)
 GET         /songs                                  controllers.SongController.getSongs

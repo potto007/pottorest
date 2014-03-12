@@ -22,14 +22,14 @@ public class Song extends Model {
     private String songName;
 
     @ManyToOne
-    @PrimaryKeyJoinColumn(name="song_id", referencedColumnName = "artist_id")
+//    @PrimaryKeyJoinColumn(name="song_id", referencedColumnName = "artist_id")
     private Artist artist;
 //    @Required
 //    @Column(name= "artist_id")
 //    public Long artistId;
 
     @ManyToOne
-    @PrimaryKeyJoinColumn(name="song_id", referencedColumnName = "album_id")
+//    @PrimaryKeyJoinColumn(name="song_id", referencedColumnName = "album_id")
     private Album album;
 //    @Required
 //    @Column(name= "album_id")

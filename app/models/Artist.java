@@ -36,6 +36,11 @@ public class Artist extends Model {
         return find.all();
     }
 
+    public static List<Artist> getLabelArtists(Long labelId) {
+        find.where().ieq("label_id",labelId);
+        return new ArrayList<Artist>();
+    }
+
     public static Artist getArtist(Long id) {
         return find.byId(id);
     }

@@ -22,6 +22,11 @@ public class ArtistController extends Controller{
         return artist == null ? notFound() : ok(Json.toJson(artist));
     }
 
+    public static Result getLabelArtists(Long labelId) {
+        List<Artist> artists = Artist.getLabelArtists(labelId);
+        return ok(Json.toJson(artists));
+    }
+
     public static Result createArtist(Long labelId) {
         Artist newArtist = Json.fromJson(request().body().asJson(), Artist.class);
         try {
