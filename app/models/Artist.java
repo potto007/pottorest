@@ -4,9 +4,11 @@ import java.util.*;
 
 import play.db.ebean.*;
 import play.data.validation.Constraints.*;
+import play.libs.Json;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.persistence.*;
-import javax.validation.ConstraintViolationException;
 
 @Entity
 @Table(name = "artist")
@@ -37,12 +39,21 @@ public class Artist extends Model {
         return find.all();
     }
 
-    public static List<Artist> getLabelArtists(Long labelId) {
-        return find.where().ieq("label_label_id", labelId.toString()).findList();
-    }
-
+/* old
     public static Artist getArtist(Long id) {
         return find.byId(id);
+    }
+*/
+
+    public static JsonNode getArtist(Long id) {
+        Artist artist = find.byId(id);
+        JsonNode artistJson =  Json.toJson(artist);
+        artistJson.
+        return artistJson;
+    }
+
+    public static List<Artist> getLabelArtists(Long labelId) {
+        return find.where().ieq("label_label_id", labelId.toString()).findList();
     }
 
     public static Artist addArtist(Artist artist, Long labelId) {

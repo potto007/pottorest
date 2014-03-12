@@ -6,6 +6,8 @@ import exceptions.WebAppExceptionHandler;
 import play.mvc.*;
 import play.libs.Json;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import models.*;
 
 import javax.persistence.PersistenceException;
@@ -18,8 +20,8 @@ public class ArtistController extends Controller{
     }
 
     public static Result getArtist(Long id) {
-        Artist artist = Artist.getArtist(id);
-        return artist == null ? notFound() : ok(Json.toJson(artist));
+        JsonNode artistJson = Artist.getArtist(id);
+        return artistJson == null ? notFound() : ok(artistJson);
     }
 
     public static Result getLabelArtists(Long labelId) {
