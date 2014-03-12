@@ -21,6 +21,7 @@ public class Artist extends Model {
     @Column(name= "artist_name", unique = true)
     public String artistName;
 
+    @Required
     @ManyToOne
 //    @PrimaryKeyJoinColumn(name="artist_id", referencedColumnName = "label_id")
     public Label label;
@@ -37,8 +38,7 @@ public class Artist extends Model {
     }
 
     public static List<Artist> getLabelArtists(Long labelId) {
-        find.where().ieq("label_id",labelId);
-        return new ArrayList<Artist>();
+        return find.where().ieq("label_label_id", labelId.toString()).findList();
     }
 
     public static Artist getArtist(Long id) {

@@ -8,12 +8,14 @@ GET         /                                       controllers.Application.inde
 GET         /artists                                controllers.ArtistController.getArtists
 GET         /artists/:id                            controllers.ArtistController.getArtist(id: Long)
 #POST        /artists                               controllers.ArtistController.createArtist
+POST        /artists/:artist/albums                 controllers.AlbumController.createAlbum(artist: Long)
+GET         /artists/:artist/albums                 controllers.AlbumController.getArtistAlbums(artist: Long)
 PUT         /artists/:id                            controllers.ArtistController.updateArtist(id: Long)
 PUT         /artists/:artist/label/:label           controllers.ArtistController.updateArtistLabel(artist: Long, label: Long)
 DELETE      /artists/:id                            controllers.ArtistController.deleteArtist(id: Long)
 GET         /albums                                 controllers.AlbumController.getAlbums
 GET         /albums/:id                             controllers.AlbumController.getAlbum(id: Long)
-POST        /albums                                 controllers.AlbumController.createAlbum
+#POST        /albums                                 controllers.AlbumController.createAlbum
 PUT         /albums/:id                             controllers.AlbumController.updateAlbum(id: Long)
 DELETE      /albums/:id                             controllers.AlbumController.deleteAlbum(id: Long)
 GET         /labels                                 controllers.LabelController.getLabels

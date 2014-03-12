@@ -14,11 +14,15 @@ public class Album extends Model {
     @Id
     @GeneratedValue
     @Column(name = "album_id")
-    private Long id;
+    public Long id;
 
     @Required
     @Column(name= "album_name")
-    private String albumName;
+    public String albumName;
+
+    @Required
+    @ManyToOne
+    public Artist artist;
 
     public static Finder<Long, Album> find = new Finder(
             Long.class, Album.class
@@ -28,11 +32,16 @@ public class Album extends Model {
         return find.all();
     }
 
+    public static List<Album> getArtistAlbums(Long artistId) {
+        return find.where().ieq("artist_artist_id", artistId.toString()).findList();
+    }
+
     public static Album getAlbum(Long id) {
         return find.byId(id);
     }
 
-    public static Album addAlbum(Album album) {
+    public static Album addAlbum(Album album, Long artistId) {
+        album.artist = Artist.find.ref(artistId);
         album.save();
         return album;
     }

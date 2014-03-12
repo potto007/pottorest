@@ -22,10 +22,15 @@ public class AlbumController extends Controller{
         return album == null ? notFound() : ok(Json.toJson(album));
     }
 
-    public static Result createAlbum() {
+    public static Result getArtistAlbums(Long artistId) {
+        List<Album> albums = Album.getArtistAlbums(artistId);
+        return ok(Json.toJson(albums));
+    }
+
+    public static Result createAlbum(Long artistId) {
         Album newAlbum = Json.fromJson(request().body().asJson(), Album.class);
         try {
-            Album inserted = Album.addAlbum(newAlbum);
+            Album inserted = Album.addAlbum(newAlbum, artistId);
             return created(Json.toJson(inserted));
         } catch (PersistenceException e) {
             WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());

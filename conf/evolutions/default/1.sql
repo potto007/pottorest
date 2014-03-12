@@ -6,6 +6,7 @@
 create table album (
   album_id                  bigint not null,
   album_name                varchar(255),
+  artist_artist_id          bigint,
   constraint pk_album primary key (album_id))
 ;
 
@@ -41,12 +42,14 @@ create sequence label_seq;
 
 create sequence song_seq;
 
-alter table artist add constraint fk_artist_label_1 foreign key (label_label_id) references label (label_id) on delete restrict on update restrict;
-create index ix_artist_label_1 on artist (label_label_id);
-alter table song add constraint fk_song_artist_2 foreign key (artist_artist_id) references artist (artist_id) on delete restrict on update restrict;
-create index ix_song_artist_2 on song (artist_artist_id);
-alter table song add constraint fk_song_album_3 foreign key (album_album_id) references album (album_id) on delete restrict on update restrict;
-create index ix_song_album_3 on song (album_album_id);
+alter table album add constraint fk_album_artist_1 foreign key (artist_artist_id) references artist (artist_id) on delete restrict on update restrict;
+create index ix_album_artist_1 on album (artist_artist_id);
+alter table artist add constraint fk_artist_label_2 foreign key (label_label_id) references label (label_id) on delete restrict on update restrict;
+create index ix_artist_label_2 on artist (label_label_id);
+alter table song add constraint fk_song_artist_3 foreign key (artist_artist_id) references artist (artist_id) on delete restrict on update restrict;
+create index ix_song_artist_3 on song (artist_artist_id);
+alter table song add constraint fk_song_album_4 foreign key (album_album_id) references album (album_id) on delete restrict on update restrict;
+create index ix_song_album_4 on song (album_album_id);
 
 
 
