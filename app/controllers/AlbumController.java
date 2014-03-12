@@ -17,8 +17,13 @@ public class AlbumController extends Controller{
         return ok(Json.toJson(albums));
     }
 
-    public static Result getAlbum(Long id) {
-        Album album = Album.getAlbum(id);
+// This should be an overloaded form of getAlbum, but static binding of routes prevents that from being allowed.
+    public static Result getArtistAlbum(Long artistId, Long albumId) {
+        return getAlbum(albumId);
+    }
+
+    public static Result getAlbum(Long albumId) {
+        Album album = Album.getAlbum(albumId);
         return album == null ? notFound() : ok(Json.toJson(album));
     }
 

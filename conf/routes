@@ -10,6 +10,11 @@ GET         /artists/:id                            controllers.ArtistController
 #POST        /artists                               controllers.ArtistController.createArtist
 POST        /artists/:artist/albums                 controllers.AlbumController.createAlbum(artist: Long)
 GET         /artists/:artist/albums                 controllers.AlbumController.getArtistAlbums(artist: Long)
+GET         /artists/:artist/albums/:album          controllers.AlbumController.getArtistAlbum(artist:Long, album: Long)
+GET         /artists/:artist/albums/:album/songs    controllers.SongController.getArtistAlbumSongs(artist:Long, album: Long)
+POST        /artists/:artist/albums/:album/song   controllers.SongController.createArtistAlbumSong(artist: Long, album: Long)
+GET         /artists/:artist/songs                  controllers.SongController.getArtistSongs(artist: Long)
+#POST        /artists/:artist/songs                  controllers.SongController.createArtistSongs(artist: Long)
 PUT         /artists/:id                            controllers.ArtistController.updateArtist(id: Long)
 PUT         /artists/:artist/label/:label           controllers.ArtistController.updateArtistLabel(artist: Long, label: Long)
 DELETE      /artists/:id                            controllers.ArtistController.deleteArtist(id: Long)

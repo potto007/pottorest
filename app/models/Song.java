@@ -15,22 +15,22 @@ public class Song extends Model {
     @Id
     @GeneratedValue
     @Column(name= "song_id")
-    private Long id;
+    public Long id;
 
     @Required
     @Column(name= "song_name")
-    private String songName;
+    public String songName;
 
     @ManyToOne
 //    @PrimaryKeyJoinColumn(name="song_id", referencedColumnName = "artist_id")
-    private Artist artist;
+    public Artist artist;
 //    @Required
 //    @Column(name= "artist_id")
 //    public Long artistId;
 
     @ManyToOne
 //    @PrimaryKeyJoinColumn(name="song_id", referencedColumnName = "album_id")
-    private Album album;
+    public Album album;
 //    @Required
 //    @Column(name= "album_id")
 //    public Long albumId;
@@ -47,7 +47,22 @@ public class Song extends Model {
         return find.byId(id);
     }
 
+    public static List<Song> getArtistSongs(Long artistId) {
+        return find.where().ieq("artist_artist_id", artistId.toString()).findList();
+    }
+
+    public static List<Song> getAlbumSongs(Long albumId) {
+        return find.where().ieq("album_album_id", albumId.toString()).findList();
+    }
+
     public static Song addSong(Song song) {
+        song = addSong(song, null, null);
+        return song;
+    }
+
+    public static Song addSong(Song song, Long artistId, Long albumId) {
+        song.artist = Artist.find.ref(artistId);
+        song.album = Album.find.ref(albumId);
         song.save();
         return song;
     }
