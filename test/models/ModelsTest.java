@@ -15,6 +15,9 @@ public class ModelsTest extends WithApplication {
     }
 
     public void createAndRetrieveLabel() {
-        new Label("Test Label").save();
+        new Label("TestLabel").save();
+        Label testLabel = Label.find.where().eq("label_name", "TestLabel").findUnique();
+        assertNotNull(testLabel);
+        assertEquals("TestLabel", testLabel.labelName);
     }
 }
