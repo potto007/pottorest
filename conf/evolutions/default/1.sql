@@ -13,7 +13,7 @@ create table album (
 create table artist (
   artist_id                 bigint not null,
   artist_name               varchar(255),
-  label_label_id            bigint,
+  label_label_id            bigint not null,
   constraint uq_artist_artist_name unique (artist_name),
   constraint pk_artist primary key (artist_id))
 ;

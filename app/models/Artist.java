@@ -6,6 +6,7 @@ import play.db.ebean.*;
 import play.data.validation.Constraints.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "artist")
@@ -22,6 +23,8 @@ public class Artist extends Model {
 
     @Required
     @ManyToOne
+    @NotNull
+    @Column(nullable = false)
     public Label label;
 
     public Artist(String artistName, Label label) {
