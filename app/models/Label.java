@@ -20,6 +20,10 @@ public class Label extends Model {
     @Column(name= "label_name", unique = true)
     public String labelName;
 
+    public Label(String labelName) {
+        this.labelName = labelName;
+    }
+
     public static Finder<Long, Label> find = new Finder(
             Long.class, Label.class
     );

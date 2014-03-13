@@ -22,11 +22,12 @@ public class Artist extends Model {
 
     @Required
     @ManyToOne
-//    @PrimaryKeyJoinColumn(name="artist_id", referencedColumnName = "label_id")
     public Label label;
-//    @Required
-//    @Column(name = "label_id")
-//    public String labelId;
+
+    public Artist(String artistName, Label label) {
+        this.artistName = artistName;
+        this.label = label;
+    }
 
     public static Finder<Long, Artist> find = new Finder(
             Long.class, Artist.class

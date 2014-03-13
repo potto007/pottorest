@@ -24,6 +24,10 @@ public class Album extends Model {
     @ManyToOne
     public Artist artist;
 
+    public Album(String albumName) {
+        this.albumName = albumName;
+    }
+
     public static Finder<Long, Album> find = new Finder(
             Long.class, Album.class
     );

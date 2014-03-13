@@ -22,18 +22,16 @@ public class Song extends Model {
     public String songName;
 
     @ManyToOne
-//    @PrimaryKeyJoinColumn(name="song_id", referencedColumnName = "artist_id")
     public Artist artist;
-//    @Required
-//    @Column(name= "artist_id")
-//    public Long artistId;
 
     @ManyToOne
-//    @PrimaryKeyJoinColumn(name="song_id", referencedColumnName = "album_id")
     public Album album;
-//    @Required
-//    @Column(name= "album_id")
-//    public Long albumId;
+
+    public Song(String songName, Artist artist, Album album) {
+        this.songName = songName;
+        this.artist = artist;
+        this.album = album;
+    }
 
     public static Finder<Long, Song> find = new Finder(
             Long.class, Song.class
