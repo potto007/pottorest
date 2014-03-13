@@ -1,4 +1,29 @@
-This is your new Play application
+pottorest
 =====================================
 
-This file will be packaged with your application, when using `play dist`.
+This is a simple RESTful server using the Play Framework 2.2.
+
+Usage:
+[http://localhost:9000/]
+GET     artists                                     - lists all artists
+GET     artists/{id}                                - list artist of id
+GET     labels                                      - lists all labels
+GET     labels/{id}                                 - list label of id
+GET     albums                                      - list all albums
+GET     albums/{id}                                 - list album of id
+GET     songs                                       - list all songs
+GET     songs/{id}                                  - list song of id
+POST    labels                                      - add a label name
+    {"labelName": "Some Label"}
+PUT     labels/{id}                                 - update label name of id
+    {"labelName": "Some Label"}
+POST    labels/{labelid}/artists                    - add artist to label id
+    {"artistName": "Some Artist"}
+GET     labels/{id}/artists                         - get artists for a label
+PUT     labels/{labelid}/artists/{artistid}         - update artist name of artistid for labelid
+POST    artists/{artistid}/albums                   - add album to artistid
+GET     artists/{id}/albums                         - get albums for an artist
+PUT     artists/{artistid}/albums/{albumid}         - update album name of albumid for artistid
+POST    artists/{artistid}/albums/{albumid}/songs   - add song to albumid and artistid
+GET     artists/{artistid}/albums/{albumid}/songs   - get songs for an artists album
+

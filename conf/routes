@@ -12,7 +12,7 @@ POST        /artists/:artist/albums                 controllers.AlbumController.
 GET         /artists/:artist/albums                 controllers.AlbumController.getArtistAlbums(artist: Long)
 GET         /artists/:artist/albums/:album          controllers.AlbumController.getArtistAlbum(artist:Long, album: Long)
 GET         /artists/:artist/albums/:album/songs    controllers.SongController.getArtistAlbumSongs(artist:Long, album: Long)
-POST        /artists/:artist/albums/:album/song   controllers.SongController.createArtistAlbumSong(artist: Long, album: Long)
+POST        /artists/:artist/albums/:album/songs    controllers.SongController.createArtistAlbumSong(artist: Long, album: Long)
 GET         /artists/:artist/songs                  controllers.SongController.getArtistSongs(artist: Long)
 #POST        /artists/:artist/songs                  controllers.SongController.createArtistSongs(artist: Long)
 PUT         /artists/:id                            controllers.ArtistController.updateArtist(id: Long)
