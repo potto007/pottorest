@@ -1,5 +1,3 @@
-package models;
-
 import models.*;
 
 import org.junit.*;
@@ -14,6 +12,7 @@ public class ModelsTest extends WithApplication {
         start(fakeApplication(inMemoryDatabase()));
     }
 
+    @Test
     public void createAndRetrieveLabel() {
         new Label("TestLabel").save();
         Label testLabel = Label.find.where().eq("label_name", "TestLabel").findUnique();
