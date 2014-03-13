@@ -6,7 +6,6 @@ import play.db.ebean.*;
 import play.data.validation.Constraints.*;
 
 import javax.persistence.*;
-import javax.validation.ConstraintViolationException;
 
 @Entity
 @Table(name = "artist")
