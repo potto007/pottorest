@@ -2,7 +2,7 @@ package controllers;
 
 import java.util.*;
 
-import exceptions.WebAppExceptionHandler;
+import exceptions.*;
 import play.mvc.*;
 import play.libs.Json;
 
@@ -37,6 +37,9 @@ public class AlbumController extends Controller{
         try {
             Album inserted = Album.addAlbum(newAlbum, artistId);
             return created(Json.toJson(inserted));
+        } catch (NullProvidedException e) {
+            WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(400,e.getMessage());
+            return badRequest(errorHandler.getMessage());
         } catch (PersistenceException e) {
             WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());
             return badRequest(errorHandler.getMessage());

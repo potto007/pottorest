@@ -2,6 +2,7 @@ package models;
 
 import java.util.*;
 
+import exceptions.NullProvidedException;
 import play.db.ebean.*;
 import play.data.validation.Constraints.*;
 
@@ -27,10 +28,8 @@ public class Song extends Model {
     @ManyToOne
     public Album album;
 
-    public Song(String songName, Artist artist, Album album) {
+    public Song(String songName) {
         this.songName = songName;
-        this.artist = artist;
-        this.album = album;
     }
 
     public static Finder<Long, Song> find = new Finder(
@@ -53,12 +52,10 @@ public class Song extends Model {
         return find.where().ieq("album_album_id", albumId.toString()).findList();
     }
 
-    public static Song addSong(Song song) {
-        song = addSong(song, null, null);
-        return song;
-    }
-
-    public static Song addSong(Song song, Long artistId, Long albumId) {
+    public static Song addSong(Song song, Long artistId, Long albumId) throws NullProvidedException {
+        if ((artistId == null) || (albumId == null)) {
+            throw new NullProvidedException("Attempted to add null artist or album to song");
+        }
         song.artist = Artist.find.ref(artistId);
         song.album = Album.find.ref(albumId);
         song.save();

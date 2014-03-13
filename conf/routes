@@ -32,7 +32,7 @@ PUT         /labels/:id                             controllers.LabelController.
 DELETE      /labels/:id                             controllers.LabelController.deleteLabel(id: Long)
 GET         /songs                                  controllers.SongController.getSongs
 GET         /songs/:id                              controllers.SongController.getSong(id: Long)
-POST        /songs                                  controllers.SongController.createSong
+#POST        /songs                                  controllers.SongController.createSong
 PUT         /songs/:id                              controllers.SongController.updateSong(id: Long)
 DELETE      /songs/:id                              controllers.SongController.deleteSong(id: Long)
 

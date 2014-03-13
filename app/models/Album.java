@@ -2,6 +2,7 @@ package models;
 
 import java.util.*;
 
+import exceptions.NullProvidedException;
 import play.db.ebean.*;
 import play.data.validation.Constraints.*;
 
@@ -44,7 +45,10 @@ public class Album extends Model {
         return find.byId(id);
     }
 
-    public static Album addAlbum(Album album, Long artistId) {
+    public static Album addAlbum(Album album, Long artistId) throws NullProvidedException {
+        if (artistId == null) {
+            throw new NullProvidedException("Attempted to add null artist to album");
+        }
         album.artist = Artist.find.ref(artistId);
         album.save();
         return album;

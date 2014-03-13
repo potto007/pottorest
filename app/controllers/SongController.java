@@ -2,7 +2,7 @@ package controllers;
 
 import java.util.*;
 
-import exceptions.WebAppExceptionHandler;
+import exceptions.*;
 import play.mvc.*;
 import play.libs.Json;
 
@@ -32,22 +32,14 @@ public class SongController extends Controller{
         return ok(Json.toJson(songs));
     }
 
-    public static Result createSong() {
-        Song newSong = Json.fromJson(request().body().asJson(), Song.class);
-        try {
-            Song inserted = Song.addSong(newSong);
-            return created(Json.toJson(inserted));
-        } catch (PersistenceException e) {
-            WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());
-            return badRequest(errorHandler.getMessage());
-        }
-    }
-
     public static Result createArtistAlbumSong(Long artistId, Long albumId) {
         Song newSong = Json.fromJson(request().body().asJson(), Song.class);
         try {
             Song inserted = Song.addSong(newSong, artistId, albumId);
             return created(Json.toJson(inserted));
+        } catch (NullProvidedException e) {
+            WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(400,e.getMessage());
+            return badRequest(errorHandler.getMessage());
         } catch (PersistenceException e) {
             WebAppExceptionHandler errorHandler = new WebAppExceptionHandler(409,e.getMessage());
             return badRequest(errorHandler.getMessage());

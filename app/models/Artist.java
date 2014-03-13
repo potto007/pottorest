@@ -2,6 +2,7 @@ package models;
 
 import java.util.*;
 
+import exceptions.NullProvidedException;
 import play.db.ebean.*;
 import play.data.validation.Constraints.*;
 
@@ -27,9 +28,8 @@ public class Artist extends Model {
     @Column(nullable = false)
     public Label label;
 
-    public Artist(String artistName, Label label) {
+    public Artist(String artistName) {
         this.artistName = artistName;
-        this.label = label;
     }
 
     public static Finder<Long, Artist> find = new Finder(
@@ -48,7 +48,10 @@ public class Artist extends Model {
         return find.byId(id);
     }
 
-    public static Artist addArtist(Artist artist, Long labelId) {
+    public static Artist addArtist(Artist artist, Long labelId) throws NullProvidedException {
+        if (labelId == null) {
+            throw new NullProvidedException("Attempted to add null label to artist");
+        }
         artist.label = Label.find.ref(labelId);
         artist.save();
         return artist;
